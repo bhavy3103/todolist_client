@@ -270,7 +270,7 @@ function ToDoList() {
         <div className={styles.flexcontent}>
           <Modal confirmLoading={loading} title="Add New To Do Task" open={isAdding} onOk={handleSubmitTask} onCancel={() => setIsAdding(false)}>
             <Input style={{ marginBottom: '1rem' }} placeholder='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
-            <Input.TextArea placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
+            <Input.TextArea placeholder='Description' value={description} rows={20} onChange={(e) => setDescription(e.target.value)} />
           </Modal>
         </div>
 
@@ -278,7 +278,7 @@ function ToDoList() {
         <div className={styles.flexcontent}>
           <Modal confirmLoading={loading} title={`Update ${currentEditItem?.title}`} open={isEditing} onOk={handleUpdateTask} onCancel={() => setIsEditing(false)}>
             <Input style={{ marginBottom: '1rem' }} placeholder='Updated Title' value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} />
-            <Input.TextArea style={{ marginBottom: '1rem' }} placeholder='Updated Description' value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} />
+            <Input.TextArea style={{ marginBottom: '1rem' }} placeholder='Updated Description' rows={20} value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} />
             <Select
               onChange={setUpdatedStatus}
               value={updatedStatus}
