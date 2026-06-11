@@ -1,29 +1,29 @@
 .toDoWrapper {
-  margin-top: 10%;
+  margin-top: 80px;
   padding: 2rem;
 }
 
 @media (max-width: 768px) {
   .toDoWrapper {
-    margin-top: 25%;
+    margin-top: 90px;
   }
 }
 
 @media (max-width: 610px) {
   .toDoWrapper {
-    margin-top: 32%;
+    margin-top: 100px;
   }
 }
 
 @media (max-width: 480px) {
   .toDoWrapper {
-    margin-top: 40%;
+    margin-top: 110px;
   }
 }
 
 @media (max-width: 410px) {
   .toDoWrapper {
-    margin-top: 45%;
+    margin-top: 120px;
   }
 }
 
@@ -45,7 +45,8 @@
 }
 
 .yourtask {
-  margin-top: 30px;
+  margin-top: 0;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -54,20 +55,24 @@
   box-shadow: 0px 0.233px 8px lightgray;
   padding: 1rem;
   border-radius: 10px;
-  width: 25%;
-  margin: 1rem 1.5rem;
+  width: calc(33.333% - 2rem);
+  min-width: 280px;
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f8f9fa;
-  transition: background-color 0.3s;
+  background-color: #ffffff;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.toDoCard:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 1139px) {
   .toDoCard {
-    background-color: #ffffff;
-    width: 100%;
-    margin: 0.5rem 0;
+    width: calc(50% - 2rem);
   }
 }
 
@@ -81,7 +86,9 @@
 .toDoListCardWrapper {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
 .toDoCardFooter,
@@ -122,7 +129,7 @@
 
 @media (max-width: 1024px) {
   .toDoCard {
-    width: 45%;
+    width: calc(50% - 2rem);
     margin: 0.5rem;
   }
 }

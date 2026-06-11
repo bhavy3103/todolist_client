@@ -6,7 +6,7 @@ import { getErrorMessage } from '../../util/GetError';
 import { getUserDetails } from '../../util/GetUser';
 import ToDoServices from '../../services/toDoServices';
 import { useNavigate } from 'react-router';
-import { CheckCircleFilled, CheckCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, CheckCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import Loader from '../../components/Loader';
 // import ColumnGroup from 'antd/es/table/ColumnGroup';
 
@@ -38,7 +38,8 @@ function ToDoList() {
         return;
       }
       const response = await ToDoServices.getAllToDo(user.userId);
-      setAllToDo(response.data);
+      const sortedData = response.data?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];
+      setAllToDo(sortedData);
     } catch (err) {
       message.error(getErrorMessage(err));
     }
@@ -206,10 +207,10 @@ function ToDoList() {
           <div className={styles.toDoHeader}>
             <h2 className={styles.yourtask}>Your Tasks</h2>
             <div className={styles.addcomplete}>
-              <Input style={{ width: '100%', margin: '25px' }} onChange={handleSearch} placeholder='Search Your Task Here...' />
+              <Input size="large" style={{ width: '100%', margin: '15px 0', height: '45px', fontSize: '16px' }} onChange={handleSearch} placeholder='Search Your Task Here...' />
             </div>
 
-            <div className={styles.addcomplete}>
+            <div className={styles.addcomplete} style={{ gap: '10px' }}>
               <Button onClick={() => setIsAdding(true)} type="primary" size="large">Add Task</Button>
               {/* <Select
                 value={currentTaskType}
@@ -301,15 +302,15 @@ function ToDoList() {
           <h3>{item.title}</h3>
           <Tag color={item.isCompleted ? "cyan" : "red"}>{item.isCompleted ? 'Completed' : 'Incomplete'}</Tag>
         </div>
-        <p>{item.description}</p>
+        <p>{item.description?.length > 150 ? item.description.substring(0, 150) + '...' : item.description}</p>
         <div className={styles.toDoCardFooter}>
           <Tag>{getFormattedDate(item.createdAt)}</Tag>
           <div className={styles.toDoFooterAction}>
             <Tooltip title="Edit Task?"><EditOutlined onClick={() => handleEdit(item)} className={styles.actionIcon} /></Tooltip>
             <Tooltip title="Delete Task?"><DeleteOutlined onClick={() => handleDelete(item)} style={{ color: 'red' }} className={styles.actionIcon} /></Tooltip>
             {item.isCompleted
-              ? <Tooltip title="Mark as Incomplete"><CheckCircleFilled onClick={() => handleUpdateStatus(item._id, false)} style={{ color: 'green' }} className={styles.actionIcon} /></Tooltip>
-              : <Tooltip title="Mark as Completed"><CheckCircleOutlined onClick={() => handleUpdateStatus(item._id, true)} className={styles.actionIcon} /></Tooltip>}
+              ? <Tooltip title="Mark as Incomplete"><CloseCircleOutlined onClick={() => handleUpdateStatus(item._id, false)} style={{ color: 'orange' }} className={styles.actionIcon} /></Tooltip>
+              : <Tooltip title="Mark as Completed"><CheckCircleOutlined onClick={() => handleUpdateStatus(item._id, true)} style={{ color: 'green' }} className={styles.actionIcon} /></Tooltip>}
           </div>
         </div>
       </div>
